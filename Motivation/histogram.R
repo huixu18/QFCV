@@ -1,3 +1,7 @@
+##############################################
+# Plot histogram of empirical error distributions of validation errors in FCV and true population level stochastic test error distribution. 
+##############################################
+
 library(ggplot2)
 source("helper.R")
 
