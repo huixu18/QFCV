@@ -76,8 +76,7 @@ fcv_cal <- function(n, x, y, w, w_train, w_val, lag){
     start = start + lag
     end = end + lag 
   }
-  
-  ## calibration using point validation error
+
   val = fit(x[(n-w_train-w_val+1):(n-w_val),], y[(n-w_train-w_val+1):(n-w_val)], x[(n-w_val+1):n,], y[(n-w_val+1):n])
   point_val = mean(val)
   y_reg = err_test
