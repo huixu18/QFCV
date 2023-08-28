@@ -7,4 +7,6 @@ Forecasting by Hui Xu, Song Mei, Stephen Bates, Jonathan Taylor, and Robert Tibs
 
 To install, run
 
-> devtools::install_github("huixu18/QFCV")
+'''
+devtools::install_github("huixu18/QFCV")
+'''
