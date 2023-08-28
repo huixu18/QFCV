@@ -3,6 +3,7 @@
 ##############################################
 
 library(glmnet)
+library(quantreg)
 require(doMC)
 registerDoMC(cores = 4)
 
@@ -37,7 +38,7 @@ fit <- function(x_train, y_train, x_test, y_test){
 ###########################
 # Forward cross-validation (FCV)
 ###########################
-# Params: n = number of training samples, x = data matrix, y = outcome vector, w = window size, w_train = window size for training, lag = FCV lag 
+# Params: n = number of samples, x = data matrix, y = outcome vector, w = window size, w_train = window size for training, lag = FCV lag 
 # Output: err_val = vector of validation errors obtained from FCV 
 fcv <- function(n, x, y, w, w_train, lag){
   start = 1
@@ -53,4 +54,44 @@ fcv <- function(n, x, y, w, w_train, lag){
   return(err_val)
 }
 
+###########################
+# Quantile-based forward cross-validation (QFCV)
+###########################
+# Params: n = number of samples, x = data matrix, y = outcome vector, w = window size, w_train = window size for training, w_val = window size for validation, lag = FCV lag
+# Output: err_val_list = vector of validation errors, err_test_list = vector of test errors, err_hat_lo = lower end of predictive interval, err_hat_hi = upper end of predictive interval, err_hat = point estimator for prediction error 
+fcv_cal <- function(n, x, y, w, w_train, w_val, lag){
+  w_test = w - w_train - w_val 
+  start = 1
+  end = w 
+  nfold = floor((n-w)/lag) + 1
+  err_val = c()
+  err_test = c()
+  for(fold in 1:nfold){
+    train_end = start + w_train - 1
+    val_start = start + w_train 
+    val_end = start + w_train + w_val - 1
+    test_start = start + w_train + w_val
+    err_val = c(err_val, mean(fit(x[start:train_end,], y[start:train_end], x[val_start:val_end,], y[val_start:val_end])))
+    err_test = c(err_test, mean(fit(x[(val_end - w_train + 1):val_end,], y[(val_end - w_train + 1):val_end], x[test_start:end,], y[test_start:end])))
+    start = start + lag
+    end = end + lag 
+  }
+  
+  ## calibration using point validation error
+  val = fit(x[(n-w_train-w_val+1):(n-w_val),], y[(n-w_train-w_val+1):(n-w_val)], x[(n-w_val+1):n,], y[(n-w_val+1):n])
+  point_val = mean(val)
+  y_reg = err_test
+  x_reg = err_val
+  lr = lm(y_reg ~ x_reg)
+  err_hat = predict(lr, data.frame(x_reg = point_val))
+  
+  rqdata <- data.frame(err_test = err_test, err_val = err_val)
+  rqfit_lo <- rq(err_test ~ err_val, tau = 0.05, data = rqdata)
+  err_hat_lo = predict(rqfit_lo, newdata = data.frame(err_val = c(point_val)))
+  rqfit_hi <- rq(err_test ~ err_val, tau = 0.95, data = rqdata)
+  err_hat_hi = predict(rqfit_hi, newdata = data.frame(err_val = c(point_val)))
+  
+  return(list(err_val_list = err_val, err_test_list = err_test,
+              err_hat_lo = err_hat_lo, err_hat_hi = err_hat_hi, err_hat = err_hat))
+}
 
