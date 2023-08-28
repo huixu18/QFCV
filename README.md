@@ -6,3 +6,5 @@ This method was introduced in the paper Uncertainty intervals for Prediction Err
 Forecasting by Hui Xu, Song Mei, Stephen Bates, Jonathan Taylor, and Robert Tibshirani. 
 
 To install, run
+
+> devtools::install_github("huixu18/QFCV")
