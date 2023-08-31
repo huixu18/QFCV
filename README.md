@@ -5,7 +5,7 @@ Quantile-based forward cross-validation for predictive intervals for prediction 
 This method was introduced in the paper Uncertainty intervals for Prediction Errors in Time Series
 Forecasting by Hui Xu, Song Mei, Stephen Bates, Jonathan Taylor, and Robert Tibshirani. 
 
-The repository contains four folders, corresponding code to reproduce plots in different sections of the paper. 
+The repository contains four folders, corresponding code to reproduce plots in different sections of the paper listed as follows. 
 
 ### Motivation 
 - **helper.R**: contains helper functions including data generation, model fitting, FCV, and QFCV
@@ -14,3 +14,7 @@ The repository contains four folders, corresponding code to reproduce plots in d
   
 ### QFCV simulation
 - **helper.R**: contains helper functions including data generation, model fitting, FCV, and QFCV (with different variants)
+- **QFCV_variants_5_AR1.R**: contains code to numerically compare QFCV variants for test size 5 and ARMA(1,0) noise (Figure 6(a))
+- **QFCV_variants_5_AR1_MA20.R**: contains code to numerically compare QFCV variants for test size 5 and ARMA(1,20) noise (Figure 6(b))
+- **QFCV_variants_20_AR1.R**: contains code to numerically compare QFCV variants for test size 20 and ARMA(1,0) noise (Figure 6(c))
+- **QFCV_variants_20_AR1_MA20.R**: contains code to numerically compare QFCV variants for test size 20 and ARMA(1,20) noise (Figure 6(d))
