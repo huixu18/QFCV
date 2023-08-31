@@ -6,7 +6,7 @@ library(ggpubr)
 source("helper.R")
 
 ###########################
-# Run simulation for n_test = 5 and noise is ARMA(1,20)
+# Run simulation for n_test = 20 and noise is ARMA(1,20)
 ###########################
 nsim = 500
 n = 2000
