@@ -13,4 +13,4 @@ The repository contains four folders, corresponding code to reproduce plots in d
 - **histogram.R**: contains code to reproduce Figure 10 in the paper.
   
 ### QFCV simulation
-- 
+- **helper.R**: contains helper functions including data generation, model fitting, FCV, and QFCV (with different variants)
