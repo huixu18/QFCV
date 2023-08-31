@@ -6,3 +6,7 @@ This method was introduced in the paper Uncertainty intervals for Prediction Err
 Forecasting by Hui Xu, Song Mei, Stephen Bates, Jonathan Taylor, and Robert Tibshirani. 
 
 The repository contains four folders, corresponding code to reproduce plots in different sections of the paper. 
+
+### Motivation 
+
+### QFCV_variants
