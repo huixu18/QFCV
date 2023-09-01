@@ -25,3 +25,7 @@ The repository contains four folders, corresponding code to reproduce plots in d
 - **FCV_variants_5_AR1_MA20.R**: contains code to numerically compare FCV variants with QFCV(1) for test size 5 and ARMA(1,20) noise (Figure 11(b))
 - **FCV_variants_20_AR1.R**: contains code to numerically compare FCV variants with QFCV(1) for test size 20 and ARMA(1,0) noise (Figure 11(c))
 - **FCV_variants_20_AR1_MA20.R**: contains code to numerically compare FCV variants with QFCV(1) for test size 20 and ARMA(1,20) noise (Figure 11(d))
+
+### AQFCV
+- **helper.R**: contains helper functions including data generation, model fitting, FCV, and AQFCV
+- **coverage.R**: contains code to generate 
