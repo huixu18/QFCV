@@ -28,4 +28,4 @@ The repository contains four folders, corresponding code to reproduce plots in d
 
 ### AQFCV
 - **helper.R**: contains helper functions including data generation, model fitting, FCV, and AQFCV
-- **coverage.R**: contains code to generate 
+- **coverage.R**: contains code to generate instance and time average coverage for both stationary and nonstationary time series data
